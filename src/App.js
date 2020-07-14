@@ -10,6 +10,7 @@ import Orders from "./components/Orders.js";
 import Products from "./components/Products.js";
 import Images2 from "./components/product-list/Images2";
 import ProductsNew from "./components/ProductsNew.js";
+import OrdersNew from "./components/OrdersNew.js";
 import Cards from "./components/Cards";
 import "./App.css";
 import SearchProduct from "./components/Search";
@@ -121,14 +122,18 @@ function App() {
             <Route exact path="/ProductsNew">
               <Container>
                 <Typography variant="h2">ProductsNew</Typography>
-
                 <ProductsNew></ProductsNew>
+              </Container>
+            </Route>
+            <Route exact path="/OrdersNew">
+              <Container>
+                <Typography variant="h2">OrdersNew</Typography>
+                <OrdersNew></OrdersNew>
               </Container>
             </Route>
             <Route exact path="/Cards">
               <Container>
                 <Typography variant="h2">Cards</Typography>
-
                 <Cards></Cards>
               </Container>
             </Route>

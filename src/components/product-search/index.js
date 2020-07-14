@@ -1,28 +1,43 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
+// import axios from "axios";
 
 function fetchProduct(productName, keycloak) {
-  console.log(keycloak.idToken);
-  return window
-    .fetch("http://localhost:8080/apli/v1/products/" + productName, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json;charset=UTF-8",
-        Authorization: "Bearer " + keycloak.idToken,
-      },
-    })
-    .then((response) => response.json())
-    .then((response) => {
-      console.log({ response });
-      return response.data;
-    })
-    .catch(() =>
-      console.log(
-        "Can’t access " +
-          "http://localhost:8080/apli/v1/products/1" +
-          " response. Blocked by browser?"
+  const tokens = JSON.parse(localStorage.getItem("tokens"));
+  const url = "http://localhost:8080/apli/v1/products/" + productName;
+  // const token = tokens.token;
+  console.log(tokens.token);
+  const bearer = `Bearer ${tokens.token}`;
+  return (
+    // axios
+    //   .get("http://localhost:8080/apli/v1/products", {
+    //     headers: {
+    //       Accept: "application/json",
+    //       Authorization: bearer,
+    //       "Content-type": "application/json;charset=UTF-8",
+    //     }, Authorization: bearer,
+    //   })
+    window
+      .fetch(url, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          Authorization: bearer,
+        },
+      })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log({ response });
+        return response.data;
+      })
+      .catch(() =>
+        console.log(
+          "Can’t access " +
+            "http://localhost:8080/apli/v1/products/1" +
+            " response. Blocked by browser?"
+        )
       )
-    );
+  );
 }
 
 const ProductInfo = ({ productName, keycloak }) => {

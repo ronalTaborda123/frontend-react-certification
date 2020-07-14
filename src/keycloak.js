@@ -14,6 +14,7 @@ export const config = {
   },
   onTokens(tokens) {
     localStorage.getItem(tokens);
+    localStorage.setItem("tokens", JSON.stringify(tokens));
     console.log({ tokens });
   },
 };
